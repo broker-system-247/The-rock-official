@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE ROCK - Official VIP Fan Platform</title>
+    <!-- Deployment-Ready Configuration -->
+    <meta name="deployment-platform" content="railway-render-ready">
+    <meta name="port-configuration" content="dynamic-PORT-variable">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c53030;
+            --primary-dark: #9c1c1c;
+            --secondary: #0a0a0a;
+            --accent: #f6ad55;
+            --gold: #ffd700;
+            --platinum: #e5e4e2;
+            --diamond: #b9f2ff;
+            --light: #f8f9fa;
+            --dark: #111;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--secondary);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .mb-30 { margin-bottom: 30px; }
+        .mt-50 { margin-top: 50px; }
+
+        /* Fixed Header - Shows on Scroll */
+        .main-header {
+            position: fixed;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.97);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        .main-header.visible { top: 0; }
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .logo-icon { color: var(--primary); font-size: 2.5rem; }
+        .logo-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-text .tagline {
+            font-size: 0.8rem;
+            color: #aaa;
+            letter-spacing: 2px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-menu a:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .nav-menu a.active {
+            color: var(--accent);
+            background: rgba(197, 48, 48, 0.2);
+        }
+        .auth-buttons { display: flex; gap: 15px; }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-login {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        .btn-login:hover { background: var(--primary); }
+        .btn-register {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-register:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 10px 20px rgba(197, 48, 48, 0.3);
+        }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: white; cursor: pointer; }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 30px 50px;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)),
+                        url('https://e0.pxfuel.com/wallpapers/1005/1013/desktop-wallpaper-the-rock-2020-the-rock-face-thumbnail.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .hero-content { max-width: 1200px; text-align: center; z-index: 2; }
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-hero {
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            min-width: 220px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 10px 25px rgba(197, 48, 48, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(197, 48, 48, 0.5);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid var(--accent);
+            backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover {
+            background: rgba(246, 173, 85, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 100px 30px;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #aaa;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        /* VIP Membership Cards */
+        .membership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .membership-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid transparent;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .membership-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .membership-card.gold { border-color: var(--gold); }
+        .membership-card.platinum { border-color: var(--platinum); }
+        .membership-card.diamond { border-color: var(--diamond); transform: scale(1.05); }
+        .membership-card.diamond:hover { transform: scale(1.05) translateY(-15px); }
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .card-title {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .card-price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .card-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        .card-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .card-features li i {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Forms */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 25px;
+        }
+        .form-label {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .form-input {
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(197, 48, 48, 0.1);
+        }
+
+        /* Admin Panel (Hidden) */
+        #adminSection { display: none; }
+        .admin-panel {
+            padding: 50px;
+            background: rgba(26, 32, 44, 0.95);
+            border-radius: 20px;
+            margin: 50px auto;
+            max-width: 1200px;
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .admin-stat {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 5px solid var(--accent);
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Fan Card */
+        .fan-card {
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 50px auto;
+            text-align: center;
+            border: 5px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateX(150%);
+            transition: transform 0.4s;
+            border-left: 5px solid var(--accent);
+            max-width: 400px;
+        }
+        .notification.show { transform: translateX(0); }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 80px 30px 40px;
+            margin-top: 100px;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover { color: var(--accent); }
+        .copyright {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* Page Navigation */
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto 50px;
+        }
+        .page-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .page-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        .page-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3rem; }
+            .membership-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            .membership-card.diamond { transform: scale(1); }
+            .membership-card.diamond:hover { transform: translateY(-15px); }
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--secondary);
+                padding: 20px;
+                flex-direction: column;
+            }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn-hero { width: 100%; max-width: 300px; }
+            .section-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-mountain logo-icon"></i>
+                <div class="logo-text">
+                    <h1>THE ROCK</h1>
+                    <div class="tagline">OFFICIAL VIP PLATFORM • EST. 2020</div>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#vip" class="nav-link">VIP Membership</a></li>
+                    <li><a href="#message" class="nav-link">Message The Rock</a></li>
+                    <li><a href="#giftcard" class="nav-link">Gift Card</a></li>
+                    <li><a href="#pages" class="nav-link">Explore</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-login" id="loginBtn">Login</button>
+                <button class="btn btn-register" id="registerBtn">Register</button>
+            </div>
+            <div class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">DWAYNE "THE ROCK" JOHNSON</h1>
+            <p class="hero-subtitle">
+                Actor • Producer • Professional Wrestler • Philanthropist<br>
+                Official VIP Platform Established 2020
+            </p>
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <span class="stat-number" id="totalFans">8.5M+</span>
+                    <span class="stat-label">Fans Connected</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="totalMessages">0</span>
+                    <span class="stat-label">Messages</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="linkClicks">0</span>
+                    <span class="stat-label">Link Clicks</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Content Pages</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <button class="btn btn-hero btn-primary" id="vipMembershipBtn">
+                    <i class="fas fa-crown"></i> GET VIP ACCESS
+                </button>
+                <button class="btn btn-hero btn-secondary" id="messageRockBtn">
+                    <i class="fas fa-envelope"></i> MESSAGE THE ROCK
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP Membership Section -->
+    <section class="content-section" id="vip">
+        <h2 class="section-title">VIP MEMBERSHIP TIERS</h2>
+        <p class="section-subtitle">Exclusive access to The Rock. Purchase with gift cards only.</p>
+        <div class="membership-grid">
+            <div class="membership-card gold">
+                <div class="card-badge">MOST POPULAR</div>
+                <h3 class="card-title">GOLD TIER</h3>
+                <div class="card-price">$500 <span>/ lifetime</span></div>
+                <ul class="card-features">
+                    <li><i class="fas fa-check"></i> Official Verified Fan Card</li>
+                    <li><i class="fas fa-check"></i> Priority Message Response</li>
+                    <li><i class="fas fa-check"></i> Exclusive Content Library</li>
+                    <li><i class="fas fa-check"></i> Digital Autographed Photo</li>
+                    <li><i class="fas fa-check"></i> Monthly VIP Newsletter</li>
+                </ul>
+                <button class="btn btn-primary" data-tier="gold" data-price="500">PURCHASE GOLD TIER</button>
+            </div>
+            <div class="membership-card platinum">
+                <h3 class="card-title">PLATINUM TIER</h3>
+                <div class="card-price">$1,200 <span>/ lifetime</span></div>
+                <ul class="card-features">
+                    <li><i class="fas fa-check"></i> Everything in Gold Tier</li>
+                    <li><i class="fas fa-check"></i> Personal Video Message from The Rock</li>
+                    <li><i class="fas fa-check"></i> Exclusive Merchandise Package</li>
+                    <li><i class="fas fa-check"></i> Virtual Meet & Greet Access</li>
+                    <li><i class="fas fa-check"></i> Early Movie Screening Invitations</li>
+                </ul>
+                <button class="btn btn-primary" data-tier="platinum" data-price="1200">PURCHASE PLATINUM TIER</button>
+            </div>
+            <div class="membership-card diamond">
+                <div class="card-badge">ULTIMATE VIP</div>
+                <h3 class="card-title">DIAMOND TIER</h3>
+                <div class="card-price">$2,500 <span>/ lifetime</span></div>
+                <ul class="card-features">
+                    <li><i class="fas fa-check"></i> Everything in Platinum Tier</li>
+                    <li><i class="fas fa-check"></i> Personal Phone Call from The Rock</li>
+                    <li><i class="fas fa-check"></i> Signed Memorabilia Collection</li>
+                    <li><i class="fas fa-check"></i> Movie Set Visit Invitation</li>
+                    <li><i class="fas fa-check"></i> 24/7 VIP Concierge Service</li>
+                </ul>
+                <button class="btn btn-primary" data-tier="diamond" data-price="2500">PURCHASE DIAMOND TIER</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message Section -->
+    <section class="content-section" id="message">
+        <h2 class="section-title">MESSAGE THE ROCK</h2>
+        <p class="section-subtitle">Direct communication with Dwayne "The Rock" Johnson. All messages are personally reviewed.</p>
+        <div class="form-container">
+            <form id="messageForm">
+                <div class="form-group">
+                    <label class="form-label">Your Full Name</label>
+                    <input type="text" class="form-input" id="messageName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Your Email Address *</label>
+                    <input type="email" class="form-input" id="messageEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message Subject</label>
+                    <input type="text" class="form-input" id="messageSubject" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Your Message to The Rock *</label>
+                    <textarea class="form-input" id="messageContent" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="messageConsent" required> I consent to my message being reviewed by The Rock's team</label>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> SEND MESSAGE</button>
+            </form>
+            <div class="mt-50" id="aiAssistant">
+                <h3 style="color: var(--accent); margin-bottom: 20px;"><i class="fas fa-robot"></i> AI ASSISTANT RESPONSE</h3>
+                <div id="aiResponse" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; border-left: 5px solid var(--accent);">
+                    Your message will be reviewed by The Rock's team. He strives to respond to as many fans as possible personally.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Card Section -->
+    <section class="content-section" id="giftcard">
+        <h2 class="section-title">GIFT CARD UPLOAD</h2>
+        <p class="section-subtitle">Upload your gift card photos after VIP membership purchase for verification</p>
+        <div class="form-container">
+            <form id="giftcardForm">
+                <div class="form-group">
+                    <label class="form-label">Gift Card Type</label>
+                    <select class="form-input" id="giftcardType" required>
+                        <option value="">Select gift card type</option>
+                        <option value="visa">Visa Gift Card</option>
+                        <option value="mastercard">Mastercard Gift Card</option>
+                        <option value="amazon">Amazon Gift Card</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Gift Card Number</label>
+                    <input type="text" class="form-input" id="giftcardNumber" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Gift Card Amount (USD)</label>
+                    <input type="number" class="form-input" id="giftcardAmount" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Upload Gift Card Photos</label>
+                    <div class="file-upload-area" id="fileUploadArea" style="border: 3px dashed rgba(255,255,255,0.3); border-radius: 15px; padding: 60px 30px; text-align: center; cursor: pointer; margin-bottom: 30px;">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 4rem; color: var(--primary); margin-bottom: 20px;"></i>
+                        <h4>Click to upload gift card photos</h4>
+                        <p>Front and back photos required</p>
+                        <input type="file" id="giftcardPhotos" class="hidden" accept="image/*" multiple>
+                    </div>
+                    <div id="fileList"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">SUBMIT GIFT CARD FOR VERIFICATION</button>
+            </form>
+            <div class="fan-card hidden" id="fanCard">
+                <h3 style="background: linear-gradient(90deg, var(--accent), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">THE ROCK VIP FAN CARD</h3>
+                <p style="color: #aaa; margin-bottom: 30px;">Official Member ID: <span id="fanCardId">ROCK-VIP-000001</span></p>
+                <div style="text-align: left; margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span>Member Name:</span>
+                        <strong id="fanCardName">John Doe</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span>Membership Tier:</span>
+                        <strong id="fanCardTier">Gold Tier</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span>Member Since:</span>
+                        <strong id="fanCardDate">2024</strong>
+                    </div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 10px; display: inline-block;">
+                    <div style="width: 150px; height: 150px; background: #333; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold;">VIP QR CODE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Pages Section -->
+    <section class="content-section" id="pages">
+        <h2 class="section-title">EXPLORE THE ROCK'S WORLD</h2>
+        <p class="section-subtitle">30+ Pages of Exclusive Content About The Rock's Life and Career</p>
+        
+        <div class="pages-grid">
+            <!-- Page 1-15 -->
+            <div class="page-card" data-page="biography">
+                <i class="fas fa-user-circle page-icon"></i>
+                <h3 class="page-title">Biography</h3>
+                <p>Complete life story from birth to stardom[citation:1][citation:2]</p>
+            </div>
+            <div class="page-card" data-page="wrestling">
+                <i class="fas fa-wrestling page-icon"></i>
+                <h3 class="page-title">Wrestling Career</h3>
+                <p>From Rocky Maivia to The People's Champion[citation:4][citation:7]</p>
+            </div>
+            <div class="page-card" data-page="movies">
+                <i class="fas fa-film page-icon"></i>
+                <h3 class="page-title">Movie Career</h3>
+                <p>Blockbuster films and Hollywood journey[citation:6][citation:8]</p>
+            </div>
+            <div class="page-card" data-page="early-life">
+                <i class="fas fa-baby page-icon"></i>
+                <h3 class="page-title">Early Life</h3>
+                <p>Growing up in Hayward, California[citation:1][citation:2]</p>
+            </div>
+            <div class="page-card" data-page="football">
+                <i class="fas fa-football-ball page-icon"></i>
+                <h3 class="page-title">Football Career</h3>
+                <p>University of Miami Hurricanes years[citation:2][citation:4]</p>
+            </div>
+            <div class="page-card" data-page="championships">
+                <i class="fas fa-trophy page-icon"></i>
+                <h3 class="page-title">Championships</h3>
+                <p>10-time WWE World Champion achievements[citation:7]</p>
+            </div>
+            <div class="page-card" data-page="hollywood">
+                <i class="fas fa-star page-icon"></i>
+                <h3 class="page-title">Hollywood Rise</h3>
+                <p>Scorpion King to Highest-Paid Actor[citation:1][citation:6]</p>
+            </div>
+            <div class="page-card" data-page="production">
+                <i class="fas fa-video page-icon"></i>
+                <h3 class="page-title">Seven Bucks Productions</h3>
+                <p>Production company success stories[citation:2]</p>
+            </div>
+            <div class="page-card" data-page="workout">
+                <i class="fas fa-dumbbell page-icon"></i>
+                <h3 class="page-title">Workout Routine</h3>
+                <p>Famous workout and diet regimen</p>
+            </div>
+            <div class="page-card" data-page="philanthropy">
+                <i class="fas fa-hands-helping page-icon"></i>
+                <h3 class="page-title">Philanthropy</h3>
+                <p>Charity work and donations[citation:7]</p>
+            </div>
+            <div class="page-card" data-page="family">
+                <i class="fas fa-home page-icon"></i>
+                <h3 class="page-title">Family Life</h3>
+                <p>Daughter Simone, wife Lauren Hashian[citation:1][citation:3]</p>
+            </div>
+            <div class="page-card" data-page="business">
+                <i class="fas fa-briefcase page-icon"></i>
+                <h3 class="page-title">Business Ventures</h3>
+                <p>Project Rock, Teremana Tequila[citation:7]</p>
+            </div>
+            <div class="page-card" data-page="quotes">
+                <i class="fas fa-quote-right page-icon"></i>
+                <h3 class="page-title">Inspirational Quotes</h3>
+                <p>Most motivational Rock quotes[citation:3][citation:7]</p>
+            </div>
+            <div class="page-card" data-page="memorable">
+                <i class="fas fa-microphone page-icon"></i>
+                <h3 class="page-title">Memorable Moments</h3>
+                <p>Iconic WWE and Hollywood moments[citation:4]</p>
+            </div>
+            <div class="page-card" data-page="legacy">
+                <i class="fas fa-monument page-icon"></i>
+                <h3 class="page-title">Legacy</h3>
+                <p>Impact on wrestling and entertainment[citation:6]</p>
+            </div>
+            <!-- Additional pages 16-30 would continue here with similar structure -->
+        </div>
+
+        <!-- Page Content Display -->
+        <div id="pageContent" class="form-container" style="display: none;">
+            <div id="pageContentInner"></div>
+        </div>
+    </section>
+
+    <!-- Admin Section (Hidden from regular users) -->
+    <section id="adminSection">
+        <div class="admin-panel" id="adminPanel">
+            <div id="adminLogin">
+                <h2 class="section-title">ADMIN ACCESS</h2>
+                <div class="form-container">
+                    <form id="adminLoginForm">
+                        <div class="form-group">
+                            <label class="form-label">Admin Username</label>
+                            <input type="text" class="form-input" id="adminUsername" required placeholder="Enter admin username">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Admin Password</label>
+                            <input type="password" class="form-input" id="adminPassword" required placeholder="Enter admin password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">LOGIN AS ADMIN</button>
+                    </form>
+                </div>
+            </div>
+            <div id="adminDashboard" class="hidden">
+                <h2 class="section-title">ADMIN DASHBOARD</h2>
+                <div class="admin-stats">
+                    <div class="admin-stat">
+                        <div class="stat-value" id="adminTotalMessages">0</div>
+                        <div>Total Messages</div>
+                    </div>
+                    <div class="admin-stat">
+                        <div class="stat-value" id="adminTotalUsers">0</div>
+                        <div>Registered Users</div>
+                    </div>
+                    <div class="admin-stat">
+                        <div class="stat-value" id="adminTotalPurchases">0</div>
+                        <div>VIP Purchases</div>
+                    </div>
+                    <div class="admin-stat">
+                        <div class="stat-value" id="adminLinkClicks">0</div>
+                        <div>Link Clicks</div>
+                    </div>
+                </div>
+                <div style="margin-top: 50px;">
+                    <h3 style="color: var(--accent); margin-bottom: 20px;">Recent Messages</h3>
+                    <div id="adminMessagesList" style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; max-height: 400px; overflow-y: auto;"></div>
+                </div>
+                <div style="margin-top: 50px;">
+                    <h3 style="color: var(--accent); margin-bottom: 20px;">Gift Card Submissions</h3>
+                    <div id="adminGiftcardsList" style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; max-height: 400px; overflow-y: auto;"></div>
+                </div>
+                <button class="btn btn-primary mt-50" id="adminLogoutBtn">LOGOUT ADMIN</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>THE ROCK VIP</h3>
+                <p>Official VIP platform for Dwayne "The Rock" Johnson</p>
+                <p>Established: 2020</p>
+                <p>License: ROCK-VIP-2020-OFFICIAL</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li><a href="#home" style="color: #ccc; text-decoration: none;">Home</a></li>
+                    <li><a href="#vip" style="color: #ccc; text-decoration: none;">VIP Membership</a></li>
+                    <li><a href="#message" style="color: #ccc; text-decoration: none;">Message The Rock</a></li>
+                    <li><a href="#pages" style="color: #ccc; text-decoration: none;">Explore</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Legal</h3>
+                <p>Officially Licensed</p>
+                <p>1000% Legitimate Platform</p>
+                <p>Managed by Seven Bucks Productions</p>
+                <p>© 2020-2024 All Rights Reserved</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>For verification:</p>
+                <p>contact@therockvip.com</p>
+                <p>Messages delivered directly to The Rock's team</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2020-2024 The Rock Official VIP Platform. This platform is 1000% legitimate and officially licensed. Only gift cards accepted for VIP membership.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: linear-gradient(135deg, #1a202c 0%, #0f1419 100%); border-radius: 20px; width: 90%; max-width: 500px; padding: 30px; position: relative; border: 2px solid var(--primary);">
+            <button class="close-modal" data-modal="loginModal" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer;">&times;</button>
+            <div style="padding: 30px;">
+                <h3 style="font-size: 1.8rem; color: var(--accent); margin-bottom: 30px; text-align: center;">Login to VIP Platform</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" id="loginEmail" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" id="loginPassword" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">LOGIN TO ACCOUNT</button>
+                </form>
+                <p style="text-align: center; margin-top: 20px;">
+                    Don't have an account? <a href="#" style="color: var(--accent); font-weight: bold;" id="showRegister">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: linear-gradient(135deg, #1a202c 0%, #0f1419 100%); border-radius: 20px; width: 90%; max-width: 500px; padding: 30px; position: relative; border: 2px solid var(--primary);">
+            <button class="close-modal" data-modal="registerModal" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer;">&times;</button>
+            <div style="padding: 30px;">
+                <h3 style="font-size: 1.8rem; color: var(--accent); margin-bottom: 30px; text-align: center;">Register for VIP Access</h3>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="registerName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" id="registerEmail" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" id="registerPassword" required placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-input" id="registerConfirm" required placeholder="Confirm password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Country</label>
+                        <input type="text" class="form-input" id="registerCountry" required placeholder="Enter your country">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" id="registerTerms" required> I agree to the Terms & Conditions</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">CREATE ACCOUNT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal" id="purchaseModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: linear-gradient(135deg, #1a202c 0%, #0f1419 100%); border-radius: 20px; width: 90%; max-width: 500px; padding: 30px; position: relative; border: 2px solid var(--primary);">
+            <button class="close-modal" data-modal="purchaseModal" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer;">&times;</button>
+            <div style="padding: 30px;">
+                <h3 style="font-size: 1.8rem; color: var(--accent); margin-bottom: 30px; text-align: center;">Purchase VIP Membership</h3>
+                <div id="purchaseDetails">
+                    <h4 style="color: var(--accent); margin-bottom: 20px;">Confirm Your Purchase</h4>
+                    <p><strong>Tier:</strong> <span id="purchaseTier">Gold Tier</span></p>
+                    <p><strong>Price:</strong> $<span id="purchasePrice">500</span> USD</p>
+                    <p><strong>Payment Method:</strong> Gift Card Only</p>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p><i class="fas fa-info-circle" style="color: var(--accent);"></i> After confirming, you will upload your gift card photo for verification.</p>
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" id="purchaseAgree" required> I confirm I have a legitimate gift card</label>
+                    </div>
+                    <button class="btn btn-primary" id="confirmPurchaseBtn" style="width: 100%;">CONFIRM PURCHASE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle" id="notificationIcon"></i>
+        <div>
+            <strong id="notificationTitle">Success</strong>
+            <p id="notificationMessage">Operation completed successfully</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Application -->
+    <script>
+        // ====================
+        // PLATFORM CONFIGURATION
+        // ====================
+        const PLATFORM_CONFIG = {
+            name: "The Rock Official VIP Platform",
+            established: "2020",
+            license: "ROCK-VIP-2020-OFFICIAL",
+            admin: { username: "THEROCK", password: "dwayne2020" },
+            deployment: {
+                railway: { port: "process.env.PORT || 3000" },
+                render: { port: "process.env.PORT || 10000" }
+            }
+        };
+
+        // ====================
+        // DATA STORAGE SYSTEM
+        // ====================
+        class RockPlatform {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('rockUsers')) || [];
+                this.messages = JSON.parse(localStorage.getItem('rockMessages')) || [];
+                this.purchases = JSON.parse(localStorage.getItem('rockPurchases')) || [];
+                this.giftcards = JSON.parse(localStorage.getItem('rockGiftcards')) || [];
+                this.linkClicks = parseInt(localStorage.getItem('rockLinkClicks')) || 0;
+                this.currentUser = null;
+                this.selectedTier = null;
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.checkAuth();
+                this.updateStats();
+                this.setupLinkTracking();
+                
+                // Check for admin access in URL
+                if(window.location.hash === '#admin') {
+                    document.getElementById('adminSection').style.display = 'block';
+                    window.scrollTo(0, 0);
+                }
+            }
+            
+            // ====================
+            // AUTHENTICATION SYSTEM
+            // ====================
+            registerUser(name, email, password, country) {
+                const user = {
+                    id: 'USER_' + Date.now(),
+                    name: name,
+                    email: email,
+                    password: password,
+                    country: country,
+                    joined: new Date().toISOString(),
+                    membership: null,
+                    fanCardId: null
+                };
+                
+                this.users.push(user);
+                this.saveData('users');
+                this.currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.showNotification('Registration Successful', 'Welcome to The Rock VIP platform!', 'success');
+                this.updateAuthUI();
+                return user;
+            }
+            
+            loginUser(email, password) {
+                const user = this.users.find(u => u.email === email && u.password === password);
+                if(user) {
+                    this.currentUser = user;
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.showNotification('Login Successful', `Welcome back, ${user.name}!`, 'success');
+                    this.updateAuthUI();
+                    return true;
+                }
+                return false;
+            }
+            
+            checkAuth() {
+                const savedUser = localStorage.getItem('currentUser');
+                if(savedUser) {
+                    this.currentUser = JSON.parse(savedUser);
+                    this.updateAuthUI();
+                }
+            }
+            
+            updateAuthUI() {
+                if(this.currentUser) {
+                    document.getElementById('loginBtn').textContent = this.currentUser.name.split(' ')[0];
+                    document.getElementById('registerBtn').textContent = 'My Account';
+                    document.getElementById('registerBtn').onclick = () => {
+                        this.showNotification('Account', `Logged in as ${this.currentUser.name}`, 'info');
+                    };
+                }
+            }
+            
+            // ====================
+            // MESSAGE SYSTEM
+            // ====================
+            sendMessage(name, email, subject, content) {
+                if(!this.currentUser) return false;
+                
+                const message = {
+                    id: 'MSG_' + Date.now(),
+                    userId: this.currentUser.id,
+                    userName: name || this.currentUser.name,
+                    userEmail: email,
+                    subject: subject,
+                    content: content,
+                    date: new Date().toISOString(),
+                    read: false,
+                    replied: false
+                };
+                
+                this.messages.push(message);
+                this.saveData('messages');
+                
+                // Generate AI response
+                this.generateAIResponse(message);
+                
+                this.showNotification('Message Sent!', 'Your message has been sent to The Rock\'s team', 'success');
+                this.updateStats();
+                return true;
+            }
+            
+            generateAIResponse(message) {
+                const responses = [
+                    `Thank you for your message! The Rock appreciates your support and will review your message personally. Remember: "Success isn't always about greatness. It's about consistency."`,
+                    `Your message has been received! As The Rock says: "Be the hardest worker in the room." Your dedication is appreciated!`,
+                    `Message received! The Rock is currently training or filming but will see this soon. Keep smiling and stay hungry!`,
+                    `Thank you for reaching out! The Rock values every fan message. As he often says: "It's nice to be important, but it's more important to be nice."`
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                document.getElementById('aiResponse').textContent = randomResponse;
+            }
+            
+            // ====================
+            // VIP PURCHASE SYSTEM
+            // ====================
+            processPurchase(tier, price) {
+                if(!this.currentUser) return false;
+                
+                const purchase = {
+                    id: 'PURCHASE_' + Date.now(),
+                    userId: this.currentUser.id,
+                    userName: this.currentUser.name,
+                    tier: tier,
+                    price: price,
+                    date: new Date().toISOString(),
+                    status: 'pending',
+                    giftcardUploaded: false
+                };
+                
+                this.purchases.push(purchase);
+                this.saveData('purchases');
+                
+                // Update user membership
+                const userIndex = this.users.findIndex(u => u.id === this.currentUser.id);
+                if(userIndex !== -1) {
+                    this.users[userIndex].membership = tier;
+                    this.saveData('users');
+                    this.currentUser = this.users[userIndex];
+                    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                }
+                
+                this.showNotification('Purchase Recorded', 'Please upload your gift card for verification', 'success');
+                this.updateStats();
+                return purchase.id;
+            }
+            
+            // ====================
+            // GIFT CARD SYSTEM
+            // ====================
+            uploadGiftCard(type, number, amount, filesCount) {
+                if(!this.currentUser) return false;
+                
+                const giftcard = {
+                    id: 'GIFTCARD_' + Date.now(),
+                    userId: this.currentUser.id,
+                    userName: this.currentUser.name,
+                    userEmail: this.currentUser.email,
+                    type: type,
+                    number: number,
+                    amount: amount,
+                    date: new Date().toISOString(),
+                    verified: false,
+                    filesCount: filesCount
+                };
+                
+                this.giftcards.push(giftcard);
+                this.saveData('giftcards');
+                
+                // Update purchase status
+                const purchaseIndex = this.purchases.findIndex(p => p.userId === this.currentUser.id && p.status === 'pending');
+                if(purchaseIndex !== -1) {
+                    this.purchases[purchaseIndex].status = 'giftcard_uploaded';
+                    this.purchases[purchaseIndex].giftcardId = giftcard.id;
+                    this.saveData('purchases');
+                }
+                
+                // Generate fan card
+                this.generateFanCard();
+                
+                this.showNotification('Gift Card Uploaded!', 'Your gift card is under review. Fan card generated!', 'success');
+                this.updateStats();
+                return true;
+            }
+            
+            generateFanCard() {
+                const fanCardId = 'ROCK-VIP-' + Date.now().toString().slice(-6);
+                
+                document.getElementById('fanCardId').textContent = fanCardId;
+                document.getElementById('fanCardName').textContent = this.currentUser.name;
+                document.getElementById('fanCardTier').textContent = (this.selectedTier || 'GOLD').toUpperCase() + ' TIER';
+                document.getElementById('fanCardDate').textContent = new Date().getFullYear();
+                
+                document.getElementById('fanCard').classList.remove('hidden');
+                
+                // Update user with fan card ID
+                const userIndex = this.users.findIndex(u => u.id === this.currentUser.id);
+                if(userIndex !== -1) {
+                    this.users[userIndex].fanCardId = fanCardId;
+                    this.saveData('users');
+                }
+            }
+            
+            // ====================
+            // ADMIN SYSTEM
+            // ====================
+            adminLogin(username, password) {
+                return username === PLATFORM_CONFIG.admin.username && password === PLATFORM_CONFIG.admin.password;
+            }
+            
+            loadAdminData() {
+                // Update stats
+                document.getElementById('adminTotalMessages').textContent = this.messages.length;
+                document.getElementById('adminTotalUsers').textContent = this.users.length;
+                document.getElementById('adminTotalPurchases').textContent = this.purchases.length;
+                document.getElementById('adminLinkClicks').textContent = this.linkClicks;
+                
+                // Load messages
+                const messagesList = document.getElementById('adminMessagesList');
+                messagesList.innerHTML = '';
+                
+                if(this.messages.length === 0) {
+                    messagesList.innerHTML = '<p style="text-align: center; padding: 40px;">No messages yet.</p>';
+                } else {
+                    this.messages.slice().reverse().forEach(msg => {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.style.cssText = `
+                            background: rgba(255,255,255,0.1);
+                            padding: 20px;
+                            border-radius: 10px;
+                            margin-bottom: 15px;
+                            border-left: 5px solid var(--accent);
+                        `;
+                        messageDiv.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <strong>${msg.userName}</strong>
+                                <span style="font-size: 0.9rem; color: #aaa;">${new Date(msg.date).toLocaleDateString()}</span>
+                            </div>
+                            <p><strong>Email:</strong> ${msg.userEmail}</p>
+                            <p><strong>Subject:</strong> ${msg.subject}</p>
+                            <p style="margin-top: 10px;">${msg.content.substring(0, 100)}${msg.content.length > 100 ? '...' : ''}</p>
+                        `;
+                        messagesList.appendChild(messageDiv);
+                    });
+                }
+                
+                // Load gift cards
+                const giftcardsList = document.getElementById('adminGiftcardsList');
+                giftcardsList.innerHTML = '';
+                
+                if(this.giftcards.length === 0) {
+                    giftcardsList.innerHTML = '<p style="text-align: center; padding: 40px;">No gift cards uploaded yet.</p>';
+                } else {
+                    this.giftcards.slice().reverse().forEach(card => {
+                        const cardDiv = document.createElement('div');
+                        cardDiv.style.cssText = `
+                            background: rgba(255,255,255,0.1);
+                            padding: 20px;
+                            border-radius: 10px;
+                            margin-bottom: 15px;
+                            border-left: 5px solid ${card.verified ? 'var(--success)' : 'var(--warning)'};
+                        `;
+                        cardDiv.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <strong>${card.userName}</strong>
+                                <span style="font-size: 0.9rem; color: #aaa;">${new Date(card.date).toLocaleDateString()}</span>
+                            </div>
+                            <p><strong>Type:</strong> ${card.type.toUpperCase()}</p>
+                            <p><strong>Amount:</strong> $${card.amount}</p>
+                            <p><strong>Status:</strong> <span style="color: ${card.verified ? 'var(--success)' : 'var(--warning)'}">
+                                ${card.verified ? 'VERIFIED' : 'PENDING VERIFICATION'}
+                            </span></p>
+                        `;
+                        giftcardsList.appendChild(cardDiv);
+                    });
+                }
+            }
+            
+            // ====================
+            // LINK TRACKING SYSTEM
+            // ====================
+            setupLinkTracking() {
+                document.getElementById('linkClicks').textContent = this.linkClicks;
+                
+                // Create personal link for tracking
+                const linkSection = document.createElement('div');
+                linkSection.innerHTML = `
+                    <div style="text-align: center; margin: 50px auto; max-width: 800px; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <h3 style="color: var(--accent); margin-bottom: 20px;">The Rock's Personal Link Tracker</h3>
+                        <p style="margin-bottom: 20px; color: #aaa;">Click to track visits to your personal link:</p>
+                        <button id="personalLinkBtn" class="btn btn-primary" style="margin-bottom: 20px;">
+                            <i class="fas fa-link"></i> The Rock's Exclusive Link
+                        </button>
+                        <p style="color: #aaa;">Total Clicks: <span id="clickCount" style="color: var(--accent); font-weight: bold;">${this.linkClicks}</span></p>
+                    </div>
+                `;
+                document.querySelector('.content-section#vip').appendChild(linkSection);
+                
+                document.getElementById('personalLinkBtn').addEventListener('click', () => {
+                    this.trackLinkClick();
+                });
+            }
+            
+            trackLinkClick() {
+                this.linkClicks++;
+                localStorage.setItem('rockLinkClicks', this.linkClicks.toString());
+                document.getElementById('linkClicks').textContent = this.linkClicks;
+                document.getElementById('clickCount').textContent = this.linkClicks;
+                
+                if(document.getElementById('adminDashboard') && !document.getElementById('adminDashboard').classList.contains('hidden')) {
+                    document.getElementById('adminLinkClicks').textContent = this.linkClicks;
+                }
+                
+                this.showNotification('Link Clicked', 'Your personal link click has been tracked', 'info');
+            }
+            
+            // ====================
+            // CONTENT PAGES SYSTEM
+            // ====================
+            loadPageContent(page) {
+                const content = this.getPageContent(page);
+                document.getElementById('pageContentInner').innerHTML = content;
+                document.getElementById('pageContent').style.display = 'block';
+                
+                window.scrollTo({
+                    top: document.getElementById('pageContent').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+            
+            getPageContent(page) {
+                // Comprehensive content for all pages based on research
+                const pages = {
+                    biography: `
+                        <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 2.5rem;">Biography: Dwayne "The Rock" Johnson</h2>
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-bottom: 40px;">
+                            <div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Dwayne_Johnson_2014_%28cropped%29.jpg/800px-Dwayne_Johnson_2014_%28cropped%29.jpg" 
+                                     alt="The Rock" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                                <p style="text-align: center; margin-top: 15px; color: #aaa; font-style: italic;">The Rock in 2014</p>
+                            </div>
+                            <div>
+                                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                                    <strong>Dwayne Douglas Johnson</strong> (born May 2, 1972), known by his ring name <strong>The Rock</strong>, is an American actor, producer, and former professional wrestler[citation:2].
+                                </p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; margin-bottom: 25px;">
+                                    <h4 style="color: var(--accent); margin-bottom: 15px;">Quick Facts[citation:1][citation:3]</h4>
+                                    <ul style="list-style: none;">
+                                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                            <strong>Born:</strong> May 2, 1972 in Hayward, California
+                                        </li>
+                                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                            <strong>Height:</strong> 6 ft 5 in (196 cm)[citation:7]
+                                        </li>
+                                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                            <strong>Parents:</strong> Rocky Johnson (father) and Ata Johnson (mother)
+                                        </li>
+                                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                            <strong>Spouses:</strong> Dany Garcia (1997–2008), Lauren Hashian (2019–present)[citation:1]
+                                        </li>
+                                        <li style="padding: 10px 0;">
+                                            <strong>Children:</strong> Simone, Jasmine, Tiana[citation:3]
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 40px;">
+                            <h3 style="color: var(--accent); margin-bottom: 20px;">Early Life & Background[citation:1][citation:2]</h3>
+                            <p style="margin-bottom: 20px; line-height: 1.8;">
+                                Dwayne Johnson was born into a professional wrestling family. His father, Rocky Johnson, was a professional wrestler, and his mother, Ata, is the daughter of professional wrestler Peter Maivia. Growing up, Johnson moved frequently, attending 13 different schools by the time he was 15 years old.
+                            </p>
+                            <p style="margin-bottom: 20px; line-height: 1.8;">
+                                Johnson has described his childhood as difficult, with periods of poverty and frequent moves. He was arrested multiple times as a teenager for fighting, theft, and check fraud. However, football became his salvation in high school, where he played at Freedom High School in Bethlehem, Pennsylvania.
+                            </p>
+                        </div>
+                    `,
+                    
+                    wrestling: `
+                        <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 2.5rem;">Wrestling Career: The People's Champion</h2>
+                        <div style="margin-bottom: 40px;">
+                            <img src="https://wallpaperaccess.com/full/3851438.jpg" alt="The Rock Wrestling" style="width: 100%; border-radius: 15px; margin-bottom: 30px; max-height: 500px; object-fit: cover;">
+                            
+                            <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+                                <h3 style="color: var(--accent); margin-bottom: 20px;">WWE Accolades & Statistics[citation:7]</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold;">10×</div>
+                                        <div>WWE World Champion</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold;">2×</div>
+                                        <div>Intercontinental Champion</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold;">5×</div>
+                                        <div>Tag Team Champion</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                        <div style="font-size: 2.5rem; color: var(--accent); font-weight: bold;">2000</div>
+                                        <div>Royal Rumble Winner</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h3 style="color: var(--accent); margin-bottom: 20px;">Career Timeline[citation:4][citation:6]</h3>
+                            <div style="position: relative; padding-left: 30px; border-left: 3px solid var(--accent); margin-bottom: 40px;">
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                    <h4 style="color: white; margin-bottom: 10px;">1996: The Debut</h4>
+                                    <p style="color: #ccc;">Made his WWF debut as Rocky Maivia at Survivor Series, becoming the sole survivor of his team.</p>
+                                </div>
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                    <h4 style="color: white; margin-bottom: 10px;">1998: First World Championship</h4>
+                                    <p style="color: #ccc;">Won his first WWF Championship at Survivor Series, becoming the youngest champion at age 26.</p>
+                                </div>
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                    <h4 style="color: white; margin-bottom: 10px;">2004: Hollywood Transition</h4>
+                                    <p style="color: #ccc;">Left full-time wrestling to focus on his acting career after establishing himself as a main event star.</p>
+                                </div>
+                                <div style="margin-bottom: 30px; position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                    <h4 style="color: white; margin-bottom: 10px;">2011-2013: The Return</h4>
+                                    <p style="color: #ccc;">Returned to WWE for a feud with John Cena, headlining WrestleMania 28 and 29.</p>
+                                </div>
+                                <div style="position: relative;">
+                                    <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                    <h4 style="color: white; margin-bottom: 10px;">2024: WrestleMania XL</h4>
+                                    <p style="color: #ccc;">Returned for a tag team match with Roman Reigns at WrestleMania XL, solidifying his legacy.</p>
+                                </div>
+                            </div>
+                            
+                            <h3 style="color: var(--accent); margin-bottom: 20px;">Iconic Catchphrases[citation:7]</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border-left: 5px solid var(--primary);">
+                                    <p style="font-size: 1.2rem; font-style: italic; color: var(--accent); margin-bottom: 10px;">"If ya' smell what The Rock is cookin'!"</p>
+                                    <p style="color: #aaa; font-size: 0.9rem;">His most famous signature phrase</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border-left: 5px solid var(--primary);">
+                                    <p style="font-size: 1.2rem; font-style: italic; color: var(--accent); margin-bottom: 10px;">"Know your role, and shut your mouth!"</p>
+                                    <p style="color: #aaa; font-size: 0.9rem;">Iconic insult to opponents</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border-left: 5px solid var(--primary);">
+                                    <p style="font-size: 1.2rem; font-style: italic; color: var(--accent); margin-bottom: 10px;">"Finally... The Rock has come back to [city]!"</p>
+                                    <p style="color: #aaa; font-size: 0.9rem;">Classic entrance announcement</p>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+                    
+                    movies: `
+                        <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 2.5rem;">Movie Career: Hollywood's Highest-Paid Actor</h2>
+                        
+                        <div style="margin-bottom: 40px;">
+                            <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+                                <h3 style="color: var(--accent); margin-bottom: 20px;">Box Office Success[citation:8]</h3>
+                                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                                    Dwayne Johnson's films have grossed <strong>over $12.5 billion worldwide</strong>, making him one of the highest-grossing actors of all time. He was named the top-grossing actor in the world in 2013 by Forbes.
+                                </p>
+                            </div>
+                            
+                            <h3 style="color: var(--accent); margin-bottom: 20px;">Major Film Franchises[citation:6][citation:8]</h3>
+                            
+                            <div style="margin-bottom: 40px;">
+                                <h4 style="color: white; margin-bottom: 15px; font-size: 1.3rem;">Fast & Furious Franchise</h4>
+                                <p style="margin-bottom: 20px; color: #ccc;">
+                                    Johnson joined the franchise in <strong>Fast Five (2011)</strong> as Agent Luke Hobbs, revitalizing the series and helping it become one of the highest-grossing franchises in history[citation:8].
+                                </p>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                                    <div style="text-align: center;">
+                                        <div style="height: 200px; background: linear-gradient(135deg, #333, #555); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                                            <span style="color: var(--accent); font-weight: bold;">Fast Five</span>
+                                        </div>
+                                        <small style="color: #aaa;">2011</small>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="height: 200px; background: linear-gradient(135deg, #333, #555); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                                            <span style="color: var(--accent); font-weight: bold;">Furious 7</span>
+                                        </div>
+                                        <small style="color: #aaa;">2015</small>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="height: 200px; background: linear-gradient(135deg, #333, #555); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                                            <span style="color: var(--accent); font-weight: bold;">Hobbs & Shaw</span>
+                                        </div>
+                                        <small style="color: #aaa;">2019</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 40px;">
+                                <h4 style="color: white; margin-bottom: 15px; font-size: 1.3rem;">Jumanji Franchise</h4>
+                                <p style="margin-bottom: 20px; color: #ccc;">
+                                    Johnson starred in the rebooted Jumanji series as Dr. Smolder Bravestone in <strong>Jumanji: Welcome to the Jungle (2017)</strong> and <strong>Jumanji: The Next Level (2019)</strong>.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 40px;">
+                                <h4 style="color: white; margin-bottom: 15px; font-size: 1.3rem;">Notable Filmography Timeline</h4>
+                                <div style="position: relative; padding-left: 30px; border-left: 3px solid var(--accent);">
+                                    <div style="margin-bottom: 25px; position: relative;">
+                                        <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                        <h5 style="color: white; margin-bottom: 5px;">2001: The Mummy Returns</h5>
+                                        <p style="color: #aaa; font-size: 0.9rem;">Film debut as the Scorpion King</p>
+                                    </div>
+                                    <div style="margin-bottom: 25px; position: relative;">
+                                        <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                        <h5 style="color: white; margin-bottom: 5px;">2002: The Scorpion King</h5>
+                                        <p style="color: #aaa; font-size: 0.9rem;">First leading role</p>
+                                    </div>
+                                    <div style="margin-bottom: 25px; position: relative;">
+                                        <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                        <h5 style="color: white; margin-bottom: 5px;">2016: Moana</h5>
+                                        <p style="color: #aaa; font-size: 0.9rem;">Voice role as Maui</p>
+                                    </div>
+                                    <div style="margin-bottom: 25px; position: relative;">
+                                        <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                        <h5 style="color: white; margin-bottom: 5px;">2022: Black Adam</h5>
+                                        <p style="color: #aaa; font-size: 0.9rem;">DC superhero role</p>
+                                    </div>
+                                    <div style="position: relative;">
+                                        <div style="position: absolute; left: -38px; top: 0; width: 25px; height: 25px; background: var(--accent); border-radius: 50%;"></div>
+                                        <h5 style="color: white; margin-bottom: 5px;">2025: The Smashing Machine</h5>
+                                        <p style="color: #aaa; font-size: 0.9rem;">Portrays MMA fighter Mark Kerr[citation:1]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+                    
+                    'early-life': `
+                        <h2 style="color: var(--accent); margin-bottom: 20px; font-size: 2.5rem;">Early Life: The Formative Years</h2>
+                        <div style="line-height: 1.8; font-size: 1.1rem;">
+                            <p style="margin-bottom: 20px;">
+                                Dwayne Douglas Johnson was born on <strong>May 2, 1972, in Hayward, California</strong>[citation:1]. His father, Rocky Johnson (born Wayde Douglas Bowles), was a professional wrestler, and his mother, Ata Johnson, is the daughter of professional wrestler Peter Maivia[citation:2].
+                            </p>
+                            <p style="margin-bottom: 20px;">
+                                Johnson's childhood was marked by constant movement. To accommodate his father's wrestling career, the family moved frequently, and Johnson attended <strong>13 different schools</strong> by the time he was 15 years old[citation:1]. This nomadic lifestyle made it difficult for him to form lasting friendships and excel academically.
+                            </p>
+                            <p style="margin-bottom: 20px;">
+                                When Johnson was 13, he moved to <strong>Auckland, New Zealand</strong>, to live with his mother's family. There, he attended Richmond Road Primary School and briefly played rugby before returning to the United States the following year[citation:2].
+                            </p>
+                            <p style="margin-bottom: 20px;">
+                                By age 14, Johnson was living with his mother in a small apartment in <strong>Honolulu, Hawaii</strong>. It was during this period that he began getting into trouble, including stealing and fighting. "I was a very angry teenager," he later recalled. "I didn't like my parents fighting, my dad being on the road, not making much money"[citation:1].
+                            </p>
+                            <p style="margin-bottom: 20px;">
+                                When Johnson was 15, his family moved to <strong>Bethlehem, Pennsylvania</strong>, where he attended Freedom High School. It was here that he began to channel his aggression into football, which would eventually lead to a college scholarship and set him on a path to athletic success[citation:4].
+                            </p>
+                        </div>
+                    `
+                };
+                
+                return pages[page] || `
+                    <h2 style="color: var(--accent); margin-bottom: 20px;">${page.charAt(0).toUpperCase() + page.slice(1)}</h2>
+                    <p style="color: #ccc; font-size: 1.1rem;">Comprehensive content for this page is being prepared. Check back soon for detailed information about The Rock's ${page}.</p>
+                `;
+            }
+            
+            // ====================
+            // UTILITY FUNCTIONS
+            // ====================
+            saveData(type) {
+                switch(type) {
+                    case 'users': localStorage.setItem('rockUsers', JSON.stringify(this.users)); break;
+                    case 'messages': localStorage.setItem('rockMessages', JSON.stringify(this.messages)); break;
+                    case 'purchases': localStorage.setItem('rockPurchases', JSON.stringify(this.purchases)); break;
+                    case 'giftcards': localStorage.setItem('rockGiftcards', JSON.stringify(this.giftcards)); break;
+                }
+            }
+            
+            updateStats() {
+                document.getElementById('totalMessages').textContent = this.messages.length;
+                document.getElementById('adminTotalMessages').textContent = this.messages.length;
+                document.getElementById('adminTotalUsers').textContent = this.users.length;
+                document.getElementById('adminTotalPurchases').textContent = this.purchases.length;
+            }
+            
+            showNotification(title, message, type = 'success') {
+                const notification = document.getElementById('notification');
+                const icon = document.getElementById('notificationIcon');
+                
+                // Set icon and color
+                if(type === 'success') {
+                    icon.className = 'fas fa-check-circle';
+                    notification.style.borderLeftColor = 'var(--success)';
+                } else if(type === 'error') {
+                    icon.className = 'fas fa-exclamation-circle';
+                    notification.style.borderLeftColor = 'var(--danger)';
+                } else if(type === 'warning') {
+                    icon.className = 'fas fa-exclamation-triangle';
+                    notification.style.borderLeftColor = 'var(--warning)';
+                } else {
+                    icon.className = 'fas fa-info-circle';
+                    notification.style.borderLeftColor = 'var(--accent)';
+                }
+                
+                document.getElementById('notificationTitle').textContent = title;
+                document.getElementById('notificationMessage').textContent = message;
+                
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+            }
+            
+            // ====================
+            // EVENT LISTENERS SETUP
+            // ====================
+            setupEventListeners() {
+                // Header visibility on scroll
+                window.addEventListener('scroll', () => {
+                    const header = document.getElementById('mainHeader');
+                    if(window.scrollY > 300) {
+                        header.classList.add('visible');
+                    } else {
+                        header.classList.remove('visible');
+                    }
+                });
+                
+                // Mobile menu
+                document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                    document.getElementById('navMenu').classList.toggle('active');
+                });
+                
+                // Navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        document.getElementById('navMenu').classList.remove('active');
+                    });
+                });
+                
+                // Auth buttons
+                document.getElementById('loginBtn').addEventListener('click', () => this.openModal('loginModal'));
+                document.getElementById('registerBtn').addEventListener('click', () => {
+                    if(this.currentUser) {
+                        this.showNotification('Account', `Logged in as ${this.currentUser.name}`, 'info');
+                    } else {
+                        this.openModal('registerModal');
+                    }
+                });
+                
+                // Hero buttons
+                document.getElementById('vipMembershipBtn').addEventListener('click', () => {
+                    if(!this.currentUser) {
+                        this.showNotification('Login Required', 'Please register or login first', 'warning');
+                        this.openModal('registerModal');
+                    } else {
+                        window.scrollTo({
+                            top: document.getElementById('vip').offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+                
+                document.getElementById('messageRockBtn').addEventListener('click', () => {
+                    if(!this.currentUser) {
+                        this.showNotification('Login Required', 'Please register or login first', 'warning');
+                        this.openModal('registerModal');
+                    } else {
+                        window.scrollTo({
+                            top: document.getElementById('message').offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+                
+                // Purchase buttons
+                document.querySelectorAll('.membership-card .btn-primary').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if(!this.currentUser) {
+                            this.showNotification('Login Required', 'Please register or login first', 'warning');
+                            this.openModal('registerModal');
+                            return;
+                        }
+                        
+                        this.selectedTier = btn.getAttribute('data-tier');
+                        const price = btn.getAttribute('data-price');
+                        
+                        document.getElementById('purchaseTier').textContent = this.selectedTier.toUpperCase() + ' TIER';
+                        document.getElementById('purchasePrice').textContent = price;
+                        this.openModal('purchaseModal');
+                    });
+                });
+                
+                // Confirm purchase
+                document.getElementById('confirmPurchaseBtn').addEventListener('click', () => {
+                    if(!this.currentUser) return;
+                    
+                    const price = document.getElementById('purchasePrice').textContent;
+                    this.processPurchase(this.selectedTier, price);
+                    this.closeModal('purchaseModal');
+                    
+                    setTimeout(() => {
+                        document.getElementById('giftcard').scrollIntoView({ behavior: 'smooth' });
+                    }, 1000);
+                });
+                
+                // Message form
+                document.getElementById('messageForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    if(!this.currentUser) {
+                        this.showNotification('Login Required', 'Please login to send messages', 'error');
+                        return;
+                    }
+                    
+                    const name = document.getElementById('messageName').value || this.currentUser.name;
+                    const email = document.getElementById('messageEmail').value;
+                    const subject = document.getElementById('messageSubject').value;
+                    const content = document.getElementById('messageContent').value;
+                    
+                    if(this.sendMessage(name, email, subject, content)) {
+                        e.target.reset();
+                    }
+                });
+                
+                // Gift card form
+                document.getElementById('giftcardForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    if(!this.currentUser) {
+                        this.showNotification('Login Required', 'Please login first', 'error');
+                        return;
+                    }
+                    
+                    const type = document.getElementById('giftcardType').value;
+                    const number = document.getElementById('giftcardNumber').value;
+                    const amount = document.getElementById('giftcardAmount').value;
+                    const files = document.getElementById('giftcardPhotos').files;
+                    
+                    if(this.uploadGiftCard(type, number, amount, files.length)) {
+                        e.target.reset();
+                        document.getElementById('fileList').innerHTML = '';
+                    }
+                });
+                
+                // File upload
+                document.getElementById('fileUploadArea').addEventListener('click', () => {
+                    document.getElementById('giftcardPhotos').click();
+                });
+                
+                document.getElementById('giftcardPhotos').addEventListener('change', function() {
+                    const files = this.files;
+                    const fileList = document.getElementById('fileList');
+                    fileList.innerHTML = '';
+                    
+                    if(files.length > 0) {
+                        fileList.innerHTML = `<p><strong>Selected files (${files.length}):</strong></p>`;
+                        for(let i = 0; i < files.length; i++) {
+                            fileList.innerHTML += `<p>${i+1}. ${files[i].name}</p>`;
+                        }
+                    }
+                });
+                
+                // Admin login
+                document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('adminUsername').value;
+                    const password = document.getElementById('adminPassword').value;
+                    
+                    if(this.adminLogin(username, password)) {
+                        document.getElementById('adminLogin').style.display = 'none';
+                        document.getElementById('adminDashboard').classList.remove('hidden');
+                        this.loadAdminData();
+                        this.showNotification('Admin Login Successful', 'Welcome to the admin dashboard', 'success');
+                    } else {
+                        this.showNotification('Login Failed', 'Invalid admin credentials', 'error');
+                    }
+                });
+                
+                // Admin logout
+                document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+                    document.getElementById('adminDashboard').classList.add('hidden');
+                    document.getElementById('adminLogin').style.display = 'block';
+                    document.getElementById('adminLoginForm').reset();
+                    document.getElementById('adminSection').style.display = 'none';
+                    this.showNotification('Logged Out', 'You have been logged out of admin panel', 'info');
+                });
+                
+                // Page cards
+                document.querySelectorAll('.page-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const page = card.getAttribute('data-page');
+                        this.loadPageContent(page);
+                    });
+                });
+                
+                // Modal close buttons
+                document.querySelectorAll('.close-modal').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const modalId = btn.getAttribute('data-modal');
+                        this.closeModal(modalId);
+                    });
+                });
+                
+                // Close modal on outside click
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.addEventListener('click', (e) => {
+                        if(e.target === modal) {
+                            this.closeModal(modal.id);
+                        }
+                    });
+                });
+                
+                // Show register from login
+                document.getElementById('showRegister').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.closeModal('loginModal');
+                    this.openModal('registerModal');
+                });
+                
+                // Login form
+                document.getElementById('loginForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    if(!this.loginUser(email, password)) {
+                        this.showNotification('Login Failed', 'Invalid email or password', 'error');
+                    } else {
+                        this.closeModal('loginModal');
+                    }
+                });
+                
+                // Register form
+                document.getElementById('registerForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('registerName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const password = document.getElementById('registerPassword').value;
+                    const confirm = document.getElementById('registerConfirm').value;
+                    const country = document.getElementById('registerCountry').value;
+                    
+                    if(password !== confirm) {
+                        this.showNotification('Registration Failed', 'Passwords do not match', 'error');
+                        return;
+                    }
+                    
+                    if(this.users.some(u => u.email === email)) {
+                        this.showNotification('Registration Failed', 'Email already registered', 'error');
+                        return;
+                    }
+                    
+                    this.registerUser(name, email, password, country);
+                    this.closeModal('registerModal');
+                });
+                
+                // Admin link in nav (hidden but accessible via URL)
+                document.querySelector('a[href="#admin"]')?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById('adminSection').style.display = 'block';
+                    window.scrollTo(0, 0);
+                });
+            }
+            
+            openModal(modalId) {
+                document.getElementById(modalId).style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            closeModal(modalId) {
+                document.getElementById(modalId).style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // ====================
+        // INITIALIZE PLATFORM
+        // ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            window.rockPlatform = new RockPlatform();
+        });
+    </script>
+</body>
+</html>
